@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
-  FaChevronLeft, FaChevronRight, FaHome, FaUsers,
-  FaCogs, FaGift, FaTags, FaBullhorn, FaSignOutAlt, FaUserCircle
+  FaChevronLeft,
+  FaChevronRight,
+  FaHome,
+  FaUsers,
+  FaCogs,
+  FaGift,
+  FaTags,
+  FaBullhorn,
+  FaSignOutAlt,
+  FaUserCircle
 } from "react-icons/fa";
 import "./Sidebar.css";
 
@@ -22,12 +30,17 @@ export default function Sidebar() {
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="top-section">
-        {isOpen && (
-          <div className="logo">
-            <span className="logo-en">Khud</span>
-            <span className="logo-hi">पे</span>
-          </div>
-        )}
+        <div className="logo">
+          {isOpen ? (
+            <>
+              <span className="logo-en">Khud</span>
+              <span className="logo-hi">पे</span>
+            </>
+          ) : (
+            <span className="logo-icon">Khud पे</span> // collapse hone par small logo
+          )}
+        </div>
+
         <div className="toggle-icon" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FaChevronLeft /> : <FaChevronRight />}
         </div>
@@ -37,24 +50,37 @@ export default function Sidebar() {
         {menuItems.map((item, index) => (
           <li key={index}>
             <NavLink
-              to={item.path}
-              className={({ isActive }) =>
-                `menu-link ${isActive ? "active" : ""}`
-              }
-              data-tooltip={item.label}
+  to={item.path}
+  className={({ isActive }) =>
+    `menu-link ${isActive ? "active" : ""} ${isOpen ? "" : "closed"}`
+  }
+  data-tooltip={item.label}
             >
               <div className="icon">{item.icon}</div>
-              {isOpen && <span className="label">{item.label}</span>}
+<span className={`label ${isOpen ? "open" : "closed"}`}>{item.label}</span>
+
             </NavLink>
           </li>
         ))}
       </ul>
 
       <div className="bottom-section">
-        <div className="user-info">
+        <NavLink
+          to="/user-details"
+          className="user-info"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            textDecoration: "none",
+            color: "inherit",
+            cursor: "pointer",
+          }}
+        >
           <FaUserCircle className="user-icon" />
-          {isOpen && <span className="user-name">Raj Sharma</span>}
-        </div>
+          {isOpen && <span className="user-name">username</span>}
+        </NavLink>
+
         <NavLink to="/logout" className="logout" data-tooltip="Logout">
           <FaSignOutAlt />
           {isOpen && <span>Logout</span>}

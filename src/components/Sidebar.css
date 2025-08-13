@@ -10,7 +10,7 @@
   justify-content: space-between;
   transition: width 0.3s ease, transform 0.3s ease;
   width: 240px;
-  overflow: hidden;
+  /*overflow: hidden;*/
   margin-left: 15px;
 }
 
@@ -21,7 +21,10 @@
 .sidebar:not(.open) {
   width: 70px;
 }
+.sidebar:not(.open) .logo-icon {
+  font-size: 10px;   /* text size kam */
 
+}
 /* Top section */
 .top-section {
   display: flex;
@@ -42,6 +45,14 @@
   padding: 8px 12px;
   border-radius: 10px;
 }
+.logo-icon {
+  display: inline-flex;      /* ek hi line me rakhega */
+  align-items: center;       /* vertically center karega */
+  justify-content: center;   /* horizontally center karega */
+  white-space: nowrap;       /* wrap hone se roke */
+  font-size: 10px;           /* size adjust karo agar chhota chahiye */
+  padding: 4px 6px;          /* thoda gap around text */
+}
 
 .logo-hi {
   font-family: "Noto Sans Devanagari", sans-serif;
@@ -55,6 +66,10 @@
   border-radius: 50%;
   background: #e3f2fd;
   transition: background 0.2s ease;
+   margin-left: 5px;
+   z-index: 1000; 
+    position: relative;  /* position control ke liye */
+  top: 50px;
 }
 
 .toggle-icon:hover {
@@ -136,20 +151,36 @@
   border-radius: 8px;
   text-decoration: none;
   transition: background 0.2s ease;
+   /*margin-left: 15px;*/
 }
-
+.sidebar:not(.open) .user-info,
+.sidebar:not(.open) .logout {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  margin-left: 5px; /* thoda right push */
+}
 .logout:hover {
   background: #e3f2fd;
   color: #1E88E5;
 }
-
+.sidebar:not(.open) .menu-link {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+}
 /* Tooltip for collapsed mode */
 .sidebar:not(.open) .menu-link .label {
-  display: none;
+  font-size: 10px;
+  display: block;
 }
 
 .sidebar:not(.open) .menu-link:hover::after {
-  content: attr(data-tooltip);
+  content: none;
   position: absolute;
   left: 70px;
   background: #1E88E5;

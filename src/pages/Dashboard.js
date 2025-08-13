@@ -18,6 +18,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
+      
       <h1>Welcome Back, Raj Sharma 👋</h1>
       <p>Here’s what’s happening with your business today.</p>
 
